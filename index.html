@@ -18,6 +18,71 @@
             color: #e5e7eb;
             line-height: 1.6;
         }
+        /* ==== LỚP LOGIN MẬT KHẨU ==== */
+        
+        #login-box {
+            max-width: 360px;
+            margin: 40px auto;
+            background: rgba(15, 23, 42, 0.98);
+            border-radius: 18px;
+            padding: 20px 18px 22px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+        }
+        
+        #login-box h2 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: #f97316;
+            letter-spacing: 0.03em;
+        }
+        
+        #login-box p {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+        
+        #login-box input[type="password"] {
+            width: 100%;
+            margin-top: 14px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: #020617;
+            color: #e5e7eb;
+            outline: none;
+        }
+        
+        #login-box button {
+            margin-top: 12px;
+            width: 100%;
+            padding: 8px 0;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+            background: linear-gradient(135deg, #22c55e, #f97316);
+            color: #0b1120;
+            box-shadow: 0 10px 35px rgba(249, 115, 22, 0.55);
+        }
+        
+        #login-box button:active {
+            transform: translateY(1px) scale(0.99);
+        }
+        
+        #loginError {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #fca5a5;
+        }
+        /* Ẩn app chính lúc đầu, chỉ hiện sau khi pass đúng */
+        
+        #app-wrapper {
+            display: none;
+        }
         
         .page {
             max-width: 980px;
@@ -379,160 +444,212 @@
 </head>
 
 <body>
-    <div class="page">
-        <header>
-            <h1>Lịch Tập Ở Phòng Trọ</h1>
-            <p class="subtitle">Thời lượng: 20–25 phút / buổi &nbsp;•&nbsp; Tập cách 1 ngày</p>
-        </header>
 
-        <div class="layout">
-            <!-- CỘT TRÁI: LỊCH & NỘI DUNG -->
-            <div class="col">
-                <!-- LỊCH TẬP HÀNG TUẦN -->
-                <section class="card">
-                    <h2>Lịch tập hàng tuần</h2>
-                    <p class="tagline">Luân phiên tập – nghỉ để cơ thể hồi phục tốt hơn.</p>
-                    <ul>
-                        <li><span class="dot dot-on"></span><strong>Thứ 2</strong>: Tập</li>
-                        <li><span class="dot dot-off"></span><strong>Thứ 3</strong>: Nghỉ</li>
-                        <li><span class="dot dot-on"></span><strong>Thứ 4</strong>: Tập</li>
-                        <li><span class="dot dot-off"></span><strong>Thứ 5</strong>: Nghỉ</li>
-                        <li><span class="dot dot-on"></span><strong>Thứ 6</strong>: Tập</li>
-                        <li><span class="dot dot-off"></span><strong>Thứ 7</strong>: Nghỉ</li>
-                        <li><span class="dot dot-on"></span><strong>Chủ nhật</strong>: Tập nhẹ nếu muốn</li>
-                    </ul>
-                </section>
-
-                <!-- NỘI DUNG BUỔI TẬP -->
-                <section class="card">
-                    <h2>1) Khởi động – 2 phút</h2>
-                    <ul class="exercise-list">
-                        <li>Xoay vai 20 vòng</li>
-                        <li>Xoay hông 20 vòng</li>
-                        <li>Nhún gối 30 lần</li>
-                    </ul>
-                </section>
-
-                <section class="card">
-                    <h2>2) Cardio nhẹ – 7 phút</h2>
-                    <p class="tagline">Chọn 1 trong 2 option dưới đây:</p>
-
-                    <div class="option-toggle">
-                        <button class="btn-toggle active" data-target="option-a">Option A – Chạy &amp; nhảy tại chỗ</button>
-                        <button class="btn-toggle" data-target="option-b">Option B – Nhảy dây</button>
-                    </div>
-
-                    <div id="option-a" class="option-block active">
-                        <p class="section-title">Option A – Chạy &amp; nhảy tại chỗ</p>
-                        <ul class="exercise-list">
-                            <li>Chạy tại chỗ 1 phút → Nghỉ 20 giây</li>
-                            <li>Nhảy step jack 1 phút → Nghỉ 20 giây</li>
-                            <li>Chạy tại chỗ 1 phút → Nghỉ 20 giây</li>
-                            <li>Nhảy nhẹ 1 phút → Nghỉ 20 giây</li>
-                            <li>Đi tại chỗ 1 phút</li>
-                        </ul>
-                    </div>
-
-                    <div id="option-b" class="option-block">
-                        <p class="section-title">Option B – Nhảy dây</p>
-                        <ul class="exercise-list">
-                            <li>Nhảy 30 giây / Nghỉ 30 giây × 7 vòng</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <h2>3) Bụng &amp; core – 8 phút</h2>
-                    <ul class="exercise-list">
-                        <li>Plank: 3 × 40–45 giây</li>
-                        <li>Leg raise: 3 × 12</li>
-                        <li>Crunch: 3 × 20</li>
-                    </ul>
-                </section>
-
-                <section class="card">
-                    <h2>4) Thân dưới nhẹ – 6 phút</h2>
-                    <ul class="exercise-list">
-                        <li>Squat không tạ: 3 × 12–15</li>
-                        <li>Glute bridge: 3 × 15</li>
-                    </ul>
-                </section>
-
-                <section class="card">
-                    <h2>5) Giãn cơ – 2 phút</h2>
-                    <ul class="exercise-list">
-                        <li>Gập người chạm chân 30 giây</li>
-                        <li>Giãn vai / ngực</li>
-                        <li>Giãn lưng</li>
-                    </ul>
-                    <p class="note">Có thể giãn cơ lâu hơn nếu còn thời gian để giảm đau nhức ngày hôm sau.</p>
-                </section>
-            </div>
-
-            <!-- CỘT PHẢI: PLAYER ĐẾM GIỜ -->
-            <div class="col">
-                <section class="player-card">
-                    <div class="player-header">
-                        <div>
-                            <div class="player-title">Workout Timer</div>
-                            <div class="player-meta" id="sessionInfo">Full buổi tập – Option A</div>
-                        </div>
-                        <div class="step-index" id="stepIndex">Bước 1 / 1</div>
-                    </div>
-
-                    <div class="phase-pill">
-                        <span class="phase-dot work" id="phaseDot"></span>
-                        <span id="phaseText">Đang tập</span>
-                    </div>
-
-                    <div class="timer-display">
-                        <div id="timeMain" class="time-main work">00:00</div>
-                        <div class="time-label" id="timeLabel">Bắt đầu khi bấm Start</div>
-                    </div>
-
-                    <div class="current-step" id="currentStepText">Khởi động – Xoay khớp toàn thân</div>
-
-                    <div class="progress-outer">
-                        <div class="progress-inner" id="progressInner"></div>
-                    </div>
-                    <div class="progress-label">
-                        <span id="elapsedText">0:00</span>
-                        <span id="remainingText">0:00</span>
-                    </div>
-
-                    <div class="controls">
-                        <button class="sub-btn" id="prevBtn">Prev</button>
-                        <button class="main-btn" id="startPauseBtn">Start</button>
-                        <button class="sub-btn" id="nextBtn">Next</button>
-                    </div>
-
-                    <div class="controls" style="margin-top: 6px;">
-                        <button class="sub-btn" id="resetBtn">Reset</button>
-                    </div>
-
-                    <p class="player-note">
-                        • Mỗi khi hết 1 bước, timer tự nhảy sang bước tiếp theo.<br /> • Điện thoại sẽ <strong>rung nhẹ</strong> khi chuyển bước (nếu trình duyệt cho phép).
-                    </p>
-
-                    <div class="session-select">
-                        Chọn buổi:
-                        <select id="sessionSelect">
-              <option value="fullA">Full buổi – Cardio Option A</option>
-              <option value="warmup">Chỉ khởi động</option>
-              <option value="cardioA">Chỉ Cardio Option A</option>
-              <option value="cardioB">Cardio – Nhảy dây</option>
-              <option value="core">Chỉ bụng &amp; core</option>
-            </select>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <footer>
-            Lịch tập cá nhân – lưu trên GitHub cho dễ xem 💪
-        </footer>
+    <!-- LỚP MẬT KHẨU -->
+    <div id="login-box">
+        <h2>Nhập mật khẩu để xem lịch tập</h2>
+        <p>Chỉ mình với ĐT coi thôi 😎</p>
+        <input type="password" id="loginPassword" placeholder="Password..." />
+        <button onclick="checkPassword()">Vào xem</button>
+        <p id="loginError"></p>
     </div>
 
+    <!-- APP GỐC (bọc trong app-wrapper) -->
+    <div id="app-wrapper">
+        <div class="page">
+            <header>
+                <h1>Lịch Tập Ở Phòng Trọ</h1>
+                <p class="subtitle">Thời lượng: 20–25 phút / buổi &nbsp;•&nbsp; Tập cách 1 ngày</p>
+            </header>
+
+            <div class="layout">
+                <!-- CỘT TRÁI: LỊCH & NỘI DUNG -->
+                <div class="col">
+                    <!-- LỊCH TẬP HÀNG TUẦN -->
+                    <section class="card">
+                        <h2>Lịch tập hàng tuần</h2>
+                        <p class="tagline">Luân phiên tập – nghỉ để cơ thể hồi phục tốt hơn.</p>
+                        <ul>
+                            <li><span class="dot dot-on"></span><strong>Thứ 2</strong>: Tập</li>
+                            <li><span class="dot dot-off"></span><strong>Thứ 3</strong>: Nghỉ</li>
+                            <li><span class="dot dot-on"></span><strong>Thứ 4</strong>: Tập</li>
+                            <li><span class="dot dot-off"></span><strong>Thứ 5</strong>: Nghỉ</li>
+                            <li><span class="dot dot-on"></span><strong>Thứ 6</strong>: Tập</li>
+                            <li><span class="dot dot-off"></span><strong>Thứ 7</strong>: Nghỉ</li>
+                            <li><span class="dot dot-on"></span><strong>Chủ nhật</strong>: Tập nhẹ nếu muốn</li>
+                        </ul>
+                    </section>
+
+                    <!-- NỘI DUNG BUỔI TẬP -->
+                    <section class="card">
+                        <h2>1) Khởi động – 2 phút</h2>
+                        <ul class="exercise-list">
+                            <li>Xoay vai 20 vòng</li>
+                            <li>Xoay hông 20 vòng</li>
+                            <li>Nhún gối 30 lần</li>
+                        </ul>
+                    </section>
+
+                    <section class="card">
+                        <h2>2) Cardio nhẹ – 7 phút</h2>
+                        <p class="tagline">Chọn 1 trong 2 option dưới đây:</p>
+
+                        <div class="option-toggle">
+                            <button class="btn-toggle active" data-target="option-a">Option A – Chạy &amp; nhảy tại chỗ</button>
+                            <button class="btn-toggle" data-target="option-b">Option B – Nhảy dây</button>
+                        </div>
+
+                        <div id="option-a" class="option-block active">
+                            <p class="section-title">Option A – Chạy &amp; nhảy tại chỗ</p>
+                            <ul class="exercise-list">
+                                <li>Chạy tại chỗ 1 phút → Nghỉ 20 giây</li>
+                                <li>Nhảy step jack 1 phút → Nghỉ 20 giây</li>
+                                <li>Chạy tại chỗ 1 phút → Nghỉ 20 giây</li>
+                                <li>Nhảy nhẹ 1 phút → Nghỉ 20 giây</li>
+                                <li>Đi tại chỗ 1 phút</li>
+                            </ul>
+                        </div>
+
+                        <div id="option-b" class="option-block">
+                            <p class="section-title">Option B – Nhảy dây</p>
+                            <ul class="exercise-list">
+                                <li>Nhảy 30 giây / Nghỉ 30 giây × 7 vòng</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="card">
+                        <h2>3) Bụng &amp; core – 8 phút</h2>
+                        <ul class="exercise-list">
+                            <li>Plank: 3 × 40–45 giây</li>
+                            <li>Leg raise: 3 × 12</li>
+                            <li>Crunch: 3 × 20</li>
+                        </ul>
+                    </section>
+
+                    <section class="card">
+                        <h2>4) Thân dưới nhẹ – 6 phút</h2>
+                        <ul class="exercise-list">
+                            <li>Squat không tạ: 3 × 12–15</li>
+                            <li>Glute bridge: 3 × 15</li>
+                        </ul>
+                    </section>
+
+                    <section class="card">
+                        <h2>5) Giãn cơ – 2 phút</h2>
+                        <ul class="exercise-list">
+                            <li>Gập người chạm chân 30 giây</li>
+                            <li>Giãn vai / ngực</li>
+                            <li>Giãn lưng</li>
+                        </ul>
+                        <p class="note">Có thể giãn cơ lâu hơn nếu còn thời gian để giảm đau nhức ngày hôm sau.</p>
+                    </section>
+                </div>
+
+                <!-- CỘT PHẢI: PLAYER ĐẾM GIỜ -->
+                <div class="col">
+                    <section class="player-card">
+                        <div class="player-header">
+                            <div>
+                                <div class="player-title">Workout Timer</div>
+                                <div class="player-meta" id="sessionInfo">Full buổi tập – Option A</div>
+                            </div>
+                            <div class="step-index" id="stepIndex">Bước 1 / 1</div>
+                        </div>
+
+                        <div class="phase-pill">
+                            <span class="phase-dot work" id="phaseDot"></span>
+                            <span id="phaseText">Đang tập</span>
+                        </div>
+
+                        <div class="timer-display">
+                            <div id="timeMain" class="time-main work">00:00</div>
+                            <div class="time-label" id="timeLabel">Bắt đầu khi bấm Start</div>
+                        </div>
+
+                        <div class="current-step" id="currentStepText">Khởi động – Xoay khớp toàn thân</div>
+
+                        <div class="progress-outer">
+                            <div class="progress-inner" id="progressInner"></div>
+                        </div>
+                        <div class="progress-label">
+                            <span id="elapsedText">0:00</span>
+                            <span id="remainingText">0:00</span>
+                        </div>
+
+                        <div class="controls">
+                            <button class="sub-btn" id="prevBtn">Prev</button>
+                            <button class="main-btn" id="startPauseBtn">Start</button>
+                            <button class="sub-btn" id="nextBtn">Next</button>
+                        </div>
+
+                        <div class="controls" style="margin-top: 6px;">
+                            <button class="sub-btn" id="resetBtn">Reset</button>
+                        </div>
+
+                        <p class="player-note">
+                            • Mỗi khi hết 1 bước, timer tự nhảy sang bước tiếp theo.<br /> • Điện thoại sẽ <strong>rung nhẹ</strong> khi chuyển bước (nếu trình duyệt cho phép).
+                        </p>
+
+                        <div class="session-select">
+                            Chọn buổi:
+                            <select id="sessionSelect">
+                                <option value="fullA">Full buổi – Cardio Option A</option>
+                                <option value="warmup">Chỉ khởi động</option>
+                                <option value="cardioA">Chỉ Cardio Option A</option>
+                                <option value="cardioB">Cardio – Nhảy dây</option>
+                                <option value="core">Chỉ bụng &amp; core</option>
+                            </select>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <footer>
+                Lịch tập cá nhân – lưu trên GitHub cho dễ xem 💪
+            </footer>
+        </div>
+    </div>
+
+    <!-- SCRIPT MẬT KHẨU -->
+    <script>
+        const APP_PASSWORD = "dt-only"; // 🔐 ĐỔI PASS Ở ĐÂY
+        const PASS_KEY = "workout_auth";
+
+        function showApp() {
+            const loginBox = document.getElementById("login-box");
+            const appWrapper = document.getElementById("app-wrapper");
+            if (loginBox) loginBox.style.display = "none";
+            if (appWrapper) appWrapper.style.display = "block";
+        }
+
+        function checkPassword() {
+            const input = document.getElementById("loginPassword");
+            const error = document.getElementById("loginError");
+            if (!input) return;
+
+            if (input.value === APP_PASSWORD) {
+                try {
+                    localStorage.setItem(PASS_KEY, "ok"); // nhớ lần sau khỏi nhập lại
+                } catch (e) {}
+                showApp();
+            } else {
+                if (error) error.textContent = "Sai mật khẩu rồi 😅";
+            }
+        }
+
+        window.addEventListener("load", () => {
+            try {
+                if (localStorage.getItem(PASS_KEY) === "ok") {
+                    showApp();
+                }
+            } catch (e) {
+                // nếu localStorage lỗi vẫn cho login bình thường
+            }
+        });
+    </script>
+
+    <!-- SCRIPT GỐC CỦA APP (GIỮ NGUYÊN) -->
     <script>
         // ==== DATA CÁC BUỔI TẬP ====
 
