@@ -39,27 +39,19 @@ function planWarmup() {
     const arr = [];
     for (let i = 1; i <= 7; i++) {
         arr.push({
-            label: "Nhảy dây – vòng " + i,
+            label: `Nhảy dây – vòng ${i}`,
             seconds: 30,
             type: "work"
         });
-        if (i !== 7) {
-            arr.push({
-                label: "Nghỉ – sau vòng " + i,
-                seconds: 30,
-                type: "rest"
-            });
-        }
-        if (i == 7) {
-            arr.push({
-                label: "Nghỉ – sau vòng " + i,
-                seconds: 30,
-                type: "rest"
-            });
-        }
+        arr.push({
+            label: `Nghỉ – sau vòng ${i}`,
+            seconds: 30,
+            type: "rest"
+        });
     }
     return arr;
 }
+
 
 // 2) Bài chính: JJ 5', Squat, High knees, Plank, Mountain climber
 function planCardioA() {
@@ -102,6 +94,11 @@ function planCardioA() {
             seconds: 45,
             type: "work"
         },
+        {
+            label: "Nghỉ sau squat set 3",
+            seconds: 25,
+            type: "rest"
+        },
 
         // High knees 3 x 30s
         {
@@ -128,6 +125,11 @@ function planCardioA() {
             label: "High knees set 3 – 30s",
             seconds: 30,
             type: "work"
+        },
+        {
+            label: "Nghỉ sau high knees set 3",
+            seconds: 20,
+            type: "rest"
         },
 
         // Plank 4 x 30s
@@ -166,6 +168,11 @@ function planCardioA() {
             seconds: 30,
             type: "work"
         },
+        {
+            label: "Nghỉ sau plank set 4",
+            seconds: 20,
+            type: "rest"
+        },
 
         // Mountain climber 4 x 20 lần (ước lượng ~30s)
         {
@@ -202,7 +209,12 @@ function planCardioA() {
             label: "Mountain climber set 4 – 20 lần",
             seconds: 30,
             type: "work"
-        }
+        },
+        {
+            label: "Nghỉ sau MC set 4",
+            seconds: 20,
+            type: "rest"
+        },
     ];
 }
 
@@ -277,7 +289,12 @@ function planCore() {
             label: "Mountain climber set 4 – 20 lần",
             seconds: 30,
             type: "work"
-        }
+        },
+        {
+            label: "Nghỉ",
+            seconds: 20,
+            type: "rest"
+        },
     ];
 }
 
