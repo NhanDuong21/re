@@ -50,6 +50,13 @@ function planWarmup() {
                 type: "rest"
             });
         }
+        if (i == 7) {
+            arr.push({
+                label: "Nghỉ – sau vòng " + i,
+                seconds: 30,
+                type: "rest"
+            });
+        }
     }
     return arr;
 }
