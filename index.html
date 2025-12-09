@@ -4,443 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Xả Cơ Cuối Tuần</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: #020617;
-            color: #e5e7eb;
-            line-height: 1.6;
-        }
-        /* ==== LỚP LOGIN MẬT KHẨU ==== */
-        
-        #login-box {
-            max-width: 360px;
-            margin: 40px auto;
-            background: rgba(15, 23, 42, 0.98);
-            border-radius: 18px;
-            padding: 20px 18px 22px;
-            border: 1px solid rgba(148, 163, 184, 0.5);
-            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-        }
-        
-        #login-box h2 {
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-            color: #f97316;
-            letter-spacing: 0.03em;
-        }
-        
-        #login-box p {
-            font-size: 0.9rem;
-            color: #9ca3af;
-        }
-        
-        #login-box input[type="password"] {
-            width: 100%;
-            margin-top: 14px;
-            padding: 8px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            background: #020617;
-            color: #e5e7eb;
-            outline: none;
-        }
-        
-        #login-box button {
-            margin-top: 12px;
-            width: 100%;
-            padding: 8px 0;
-            border-radius: 999px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-weight: 600;
-            background: linear-gradient(135deg, #22c55e, #f97316);
-            color: #0b1120;
-            box-shadow: 0 10px 35px rgba(249, 115, 22, 0.55);
-        }
-        
-        #login-box button:active {
-            transform: translateY(1px) scale(0.99);
-        }
-        
-        #loginError {
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #fca5a5;
-        }
-        /* Ẩn app chính lúc đầu, chỉ hiện sau khi pass đúng */
-        
-        #app-wrapper {
-            display: none;
-        }
-        
-        .page {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 24px 16px 40px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        
-        h1 {
-            font-size: 2.1rem;
-            margin-bottom: 8px;
-            color: #f97316;
-            letter-spacing: 0.03em;
-        }
-        
-        .subtitle {
-            font-size: 0.95rem;
-            color: #9ca3af;
-        }
-        
-        .layout {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        @media (min-width: 860px) {
-            .layout {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-            .col {
-                flex: 1;
-            }
-        }
-        
-        .card {
-            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%), rgba(15, 23, 42, 0.96);
-            border: 1px solid rgba(148, 163, 184, 0.4);
-            border-radius: 18px;
-            padding: 16px 18px;
-            margin-bottom: 12px;
-            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-        }
-        
-        .card h2 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #fbbf24;
-        }
-        
-        .tagline {
-            font-size: 0.9rem;
-            color: #9ca3af;
-            margin-bottom: 4px;
-        }
-        
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        li {
-            margin-bottom: 4px;
-            font-size: 0.95rem;
-        }
-        
-        .dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 999px;
-            margin-right: 8px;
-        }
-        
-        .dot-on {
-            background: #22c55e;
-        }
-        
-        .dot-off {
-            background: #ef4444;
-        }
-        
-        .section-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: #facc15;
-            font-size: 1rem;
-        }
-        
-        .exercise-list {
-            margin-left: 4px;
-        }
-        
-        .exercise-list li {
-            padding-left: 14px;
-            position: relative;
-        }
-        
-        .exercise-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #9ca3af;
-        }
-        
-        .option-toggle {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
-            margin-top: 6px;
-        }
-        
-        .btn-toggle {
-            flex: 1;
-            padding: 6px 10px;
-            font-size: 0.9rem;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            background: transparent;
-            color: #e5e7eb;
-            cursor: pointer;
-            transition: 0.15s ease;
-        }
-        
-        .btn-toggle:hover {
-            background: rgba(148, 163, 184, 0.1);
-        }
-        
-        .btn-toggle.active {
-            background: #f97316;
-            border-color: #f97316;
-            color: #111827;
-            font-weight: 600;
-        }
-        
-        .option-block {
-            display: none;
-        }
-        
-        .option-block.active {
-            display: block;
-        }
-        
-        .note {
-            font-size: 0.85rem;
-            color: #9ca3af;
-            margin-top: 6px;
-        }
-        
-        footer {
-            margin-top: 18px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #6b7280;
-        }
-        /* ==== PLAYER TẬP LUYỆN ==== */
-        
-        .player-card {
-            background: radial-gradient(circle at top, rgba(249, 115, 22, 0.25), transparent 60%), rgba(15, 23, 42, 0.98);
-            border-radius: 22px;
-            border: 1px solid rgba(248, 250, 252, 0.18);
-            padding: 18px 18px 20px;
-            box-shadow: 0 24px 60px rgba(15, 23, 42, 1);
-            position: sticky;
-            top: 16px;
-        }
-        
-        .player-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 6px;
-        }
-        
-        .player-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-            color: #ffe4b5;
-        }
-        
-        .player-meta {
-            font-size: 0.8rem;
-            color: #9ca3af;
-        }
-        
-        .timer-display {
-            margin: 10px 0 12px;
-            text-align: center;
-        }
-        
-        .time-main {
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-        }
-        
-        .time-main.work {
-            color: #22c55e;
-        }
-        
-        .time-main.rest {
-            color: #f97316;
-        }
-        
-        .time-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: #9ca3af;
-            margin-top: 4px;
-        }
-        
-        .phase-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            padding: 2px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.6);
-            background: rgba(15, 23, 42, 0.9);
-            margin-bottom: 6px;
-        }
-        
-        .phase-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-        }
-        
-        .phase-dot.work {
-            background: #22c55e;
-        }
-        
-        .phase-dot.rest {
-            background: #f97316;
-        }
-        
-        .current-step {
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        
-        .step-index {
-            font-size: 0.8rem;
-            color: #9ca3af;
-        }
-        
-        .progress-outer {
-            position: relative;
-            overflow: hidden;
-            border-radius: 999px;
-            height: 10px;
-            background: rgba(15, 23, 42, 1);
-            border: 1px solid rgba(30, 64, 175, 0.9);
-            margin: 8px 0 4px;
-        }
-        
-        .progress-inner {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #22c55e, #f97316);
-            transition: width 0.4s ease;
-        }
-        
-        .progress-label {
-            font-size: 0.78rem;
-            display: flex;
-            justify-content: space-between;
-            color: #9ca3af;
-        }
-        
-        .controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        
-        .main-btn {
-            flex: 1.4;
-            padding: 9px 0;
-            border-radius: 999px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            background: linear-gradient(135deg, #22c55e, #f97316);
-            color: #0b1120;
-            box-shadow: 0 10px 35px rgba(249, 115, 22, 0.55);
-            transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
-        }
-        
-        .main-btn:active {
-            transform: translateY(1px) scale(0.99);
-            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45);
-            filter: brightness(0.95);
-        }
-        
-        .sub-btn {
-            flex: 0.8;
-            padding: 7px 0;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            background: rgba(15, 23, 42, 0.9);
-            color: #e5e7eb;
-            cursor: pointer;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            transition: 0.1s ease;
-        }
-        
-        .sub-btn:active {
-            transform: translateY(1px) scale(0.99);
-            background: rgba(30, 64, 175, 0.8);
-        }
-        
-        .player-note {
-            font-size: 0.8rem;
-            color: #9ca3af;
-            margin-top: 10px;
-        }
-        
-        .player-note strong {
-            color: #e5e7eb;
-        }
-        
-        .session-select {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: #9ca3af;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .session-select select {
-            background: transparent;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            color: #e5e7eb;
-            padding: 4px 10px;
-            font-size: 0.8rem;
-            outline: none;
-        }
-    </style>
+    <title>Lịch Tập Cách 1</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -454,12 +19,12 @@
         <p id="loginError"></p>
     </div>
 
-    <!-- APP GỐC (bọc trong app-wrapper) -->
+    <!-- APP (bọc trong app-wrapper) -->
     <div id="app-wrapper">
         <div class="page">
             <header>
-                <h1>Tập để không chết sớm mấy đứa ơi</h1>
-                <p class="subtitle">Thời lượng: 20–25 phút / buổi &nbsp;•&nbsp; Tập cách 1 ngày</p>
+                <h1>Lịch tập Cách 1 – Đều là đẹp</h1>
+                <p class="subtitle">Thời lượng: khoảng 22–28 phút / buổi • Tập cách 1 ngày</p>
             </header>
 
             <div class="layout">
@@ -480,69 +45,57 @@
                         </ul>
                     </section>
 
-                    <!-- NỘI DUNG BUỔI TẬP -->
+                    <!-- NỘI DUNG BUỔI TẬP CÁCH 1 -->
                     <section class="card">
-                        <h2>1) Khởi động – 2 phút</h2>
+                        <h2>1) Nhảy dây khởi động – 7 phút</h2>
                         <ul class="exercise-list">
-                            <li>Xoay vai 20 vòng</li>
-                            <li>Xoay hông 20 vòng</li>
-                            <li>Nhún gối 30 lần</li>
+                            <li>Nhảy dây 30 giây</li>
+                            <li>Nghỉ 30 giây</li>
+                            <li>Lặp lại tổng cộng 7 vòng</li>
+                        </ul>
+                        <p class="note">Nhịp vừa phải, không cần quá gắt, chủ yếu làm nóng &amp; lên nhịp tim.</p>
+                    </section>
+
+                    <section class="card">
+                        <h2>2) Jumping Jack – 5 phút</h2>
+                        <ul class="exercise-list">
+                            <li>Jumping jack liên tục 5 phút</li>
+                            <li>Mục tiêu: 150–200 cái (tuỳ sức)</li>
+                        </ul>
+                        <p class="note">Nếu mệt quá có thể nghỉ 10–15s giữa chừng nhưng cố gắng giữ nhịp.</p>
+                    </section>
+
+                    <section class="card">
+                        <h2>3) Squat – 3 hiệp</h2>
+                        <ul class="exercise-list">
+                            <li>20 cái × 3 hiệp</li>
+                            <li>Nghỉ 20–30 giây giữa các hiệp</li>
                         </ul>
                     </section>
 
                     <section class="card">
-                        <h2>2) Cardio nhẹ – 7 phút</h2>
-                        <p class="tagline">Chọn 1 trong 2 option dưới đây:</p>
-
-                        <div class="option-toggle">
-                            <button class="btn-toggle active" data-target="option-a">Option A – Chạy &amp; nhảy tại chỗ</button>
-                            <button class="btn-toggle" data-target="option-b">Option B – Nhảy dây</button>
-                        </div>
-
-                        <div id="option-a" class="option-block active">
-                            <p class="section-title">Option A – Chạy &amp; nhảy tại chỗ</p>
-                            <ul class="exercise-list">
-                                <li>Chạy tại chỗ 1 phút → Nghỉ 20 giây</li>
-                                <li>Nhảy step jack 1 phút → Nghỉ 20 giây</li>
-                                <li>Chạy tại chỗ 1 phút → Nghỉ 20 giây</li>
-                                <li>Nhảy nhẹ 1 phút → Nghỉ 20 giây</li>
-                                <li>Đi tại chỗ 1 phút</li>
-                            </ul>
-                        </div>
-
-                        <div id="option-b" class="option-block">
-                            <p class="section-title">Option B – Nhảy dây</p>
-                            <ul class="exercise-list">
-                                <li>Nhảy 30 giây / Nghỉ 30 giây × 7 vòng</li>
-                            </ul>
-                        </div>
-                    </section>
-
-                    <section class="card">
-                        <h2>3) Bụng &amp; core – 8 phút</h2>
+                        <h2>4) Chạy nâng cao gối – 3 hiệp</h2>
                         <ul class="exercise-list">
-                            <li>Plank: 3 × 40–45 giây</li>
-                            <li>Leg raise: 3 × 12</li>
-                            <li>Crunch: 3 × 20</li>
+                            <li>30 giây × 3 hiệp</li>
+                            <li>Nghỉ 20–30 giây giữa mỗi hiệp</li>
                         </ul>
                     </section>
 
                     <section class="card">
-                        <h2>4) Thân dưới nhẹ – 6 phút</h2>
+                        <h2>5) Plank – 4 hiệp</h2>
                         <ul class="exercise-list">
-                            <li>Squat không tạ: 3 × 12–15</li>
-                            <li>Glute bridge: 3 × 15</li>
+                            <li>Plank 30 giây × 4 hiệp</li>
+                            <li>Nghỉ 20–30 giây giữa hiệp</li>
                         </ul>
                     </section>
 
                     <section class="card">
-                        <h2>5) Giãn cơ – 2 phút</h2>
+                        <h2>6) Mountain climber – 4 hiệp</h2>
                         <ul class="exercise-list">
-                            <li>Gập người chạm chân 30 giây</li>
-                            <li>Giãn vai / ngực</li>
-                            <li>Giãn lưng</li>
+                            <li>20 lần × 4 hiệp (tempo vừa)</li>
+                            <li>Nghỉ 20–30 giây giữa hiệp</li>
                         </ul>
-                        <p class="note">Có thể giãn cơ lâu hơn nếu còn thời gian để giảm đau nhức ngày hôm sau.</p>
+                        <p class="note">Nếu còn sức có thể giãn cơ thêm 2–3 phút sau buổi tập.</p>
                     </section>
                 </div>
 
@@ -552,7 +105,7 @@
                         <div class="player-header">
                             <div>
                                 <div class="player-title">Workout Timer</div>
-                                <div class="player-meta" id="sessionInfo">Full buổi tập – Option A</div>
+                                <div class="player-meta" id="sessionInfo">Full buổi – Cách 1</div>
                             </div>
                             <div class="step-index" id="stepIndex">Bước 1 / 1</div>
                         </div>
@@ -567,7 +120,7 @@
                             <div class="time-label" id="timeLabel">Bắt đầu khi bấm Start</div>
                         </div>
 
-                        <div class="current-step" id="currentStepText">Khởi động – Xoay khớp toàn thân</div>
+                        <div class="current-step" id="currentStepText">Nhảy dây – vòng 1</div>
 
                         <div class="progress-outer">
                             <div class="progress-inner" id="progressInner"></div>
@@ -594,11 +147,10 @@
                         <div class="session-select">
                             Chọn buổi:
                             <select id="sessionSelect">
-                                <option value="fullA">Full buổi – Cardio Option A</option>
-                                <option value="warmup">Chỉ khởi động</option>
-                                <option value="cardioA">Chỉ Cardio Option A</option>
-                                <option value="cardioB">Cardio – Nhảy dây</option>
-                                <option value="core">Chỉ bụng &amp; core</option>
+                                <option value="fullA">Full buổi – Cách 1</option>
+                                <option value="warmup">Chỉ nhảy dây</option>
+                                <option value="cardioA">Chỉ bài chính (sau nhảy dây)</option>
+                                <option value="core">Plank + Mountain climber</option>
                             </select>
                         </div>
                     </section>
@@ -611,363 +163,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT MẬT KHẨU -->
-    <script>
-        const APP_PASSWORD = "1122334455"; // 🔐 ĐỔI PASS Ở ĐÂY
-        const PASS_KEY = "workout_auth";
-
-        function showApp() {
-            const loginBox = document.getElementById("login-box");
-            const appWrapper = document.getElementById("app-wrapper");
-            if (loginBox) loginBox.style.display = "none";
-            if (appWrapper) appWrapper.style.display = "block";
-        }
-
-        function checkPassword() {
-            const input = document.getElementById("loginPassword");
-            const error = document.getElementById("loginError");
-            if (!input) return;
-
-            if (input.value === APP_PASSWORD) {
-                try {
-                    localStorage.setItem(PASS_KEY, "ok"); // nhớ lần sau khỏi nhập lại
-                } catch (e) {}
-                showApp();
-            } else {
-                if (error) error.textContent = "Sai mật khẩu rồi 😅";
-            }
-        }
-
-        window.addEventListener("load", () => {
-            try {
-                if (localStorage.getItem(PASS_KEY) === "ok") {
-                    showApp();
-                }
-            } catch (e) {
-                // nếu localStorage lỗi vẫn cho login bình thường
-            }
-        });
-    </script>
-
-    <!-- SCRIPT GỐC CỦA APP (GIỮ NGUYÊN) -->
-    <script>
-        // ==== DATA CÁC BUỔI TẬP ====
-
-        function planWarmup() {
-            return [{
-                label: "Khởi động – Xoay khớp toàn thân",
-                seconds: 120,
-                type: "work"
-            }];
-        }
-
-        function planCardioA() {
-            return [{
-                label: "Chạy tại chỗ",
-                seconds: 60,
-                type: "work"
-            }, {
-                label: "Nghỉ",
-                seconds: 20,
-                type: "rest"
-            }, {
-                label: "Step jack",
-                seconds: 60,
-                type: "work"
-            }, {
-                label: "Nghỉ",
-                seconds: 20,
-                type: "rest"
-            }, {
-                label: "Chạy tại chỗ lần 2",
-                seconds: 60,
-                type: "work"
-            }, {
-                label: "Nghỉ",
-                seconds: 20,
-                type: "rest"
-            }, {
-                label: "Nhảy nhẹ",
-                seconds: 60,
-                type: "work"
-            }, {
-                label: "Nghỉ",
-                seconds: 20,
-                type: "rest"
-            }, {
-                label: "Đi tại chỗ hồi phục",
-                seconds: 60,
-                type: "work"
-            }];
-        }
-
-        function planCardioB() {
-            // 7 vòng: 30s nhảy / 30s nghỉ
-            const arr = [];
-            for (let i = 1; i <= 7; i++) {
-                arr.push({
-                    label: "Nhảy dây – vòng " + i,
-                    seconds: 30,
-                    type: "work"
-                });
-                if (i !== 7) {
-                    arr.push({
-                        label: "Nghỉ – sau vòng " + i,
-                        seconds: 30,
-                        type: "rest"
-                    });
-                }
-            }
-            return arr;
-        }
-
-        function planCore() {
-            return [{
-                label: "Plank set 1",
-                seconds: 40,
-                type: "work"
-            }, {
-                label: "Nghỉ",
-                seconds: 20,
-                type: "rest"
-            }, {
-                label: "Plank set 2",
-                seconds: 40,
-                type: "work"
-            }, {
-                label: "Nghỉ",
-                seconds: 20,
-                type: "rest"
-            }, {
-                label: "Plank set 3",
-                seconds: 45,
-                type: "work"
-            }, {
-                label: "Leg raise (ước lượng)",
-                seconds: 60,
-                type: "work"
-            }, {
-                label: "Nghỉ ngắn",
-                seconds: 20,
-                type: "rest"
-            }, {
-                label: "Crunch (ước lượng)",
-                seconds: 60,
-                type: "work"
-            }];
-        }
-
-        function planFullA() {
-            return [
-                ...planWarmup(),
-                ...planCardioA(),
-                ...planCore()
-            ];
-        }
-
-        // ==== PLAYBACK STATE ====
-
-        let currentPlanKey = "fullA";
-        let currentPlan = planFullA();
-        let currentIndex = 0;
-        let remaining = currentPlan[0].seconds;
-        let elapsedTotal = 0;
-        let totalSeconds = currentPlan.reduce((sum, step) => sum + step.seconds, 0);
-        let timerId = null;
-        let isRunning = false;
-
-        // ==== DOM ====
-        const timeMainEl = document.getElementById("timeMain");
-        const timeLabelEl = document.getElementById("timeLabel");
-        const currentStepTextEl = document.getElementById("currentStepText");
-        const progressInnerEl = document.getElementById("progressInner");
-        const elapsedTextEl = document.getElementById("elapsedText");
-        const remainingTextEl = document.getElementById("remainingText");
-        const startPauseBtn = document.getElementById("startPauseBtn");
-        const prevBtn = document.getElementById("prevBtn");
-        const nextBtn = document.getElementById("nextBtn");
-        const resetBtn = document.getElementById("resetBtn");
-        const phaseDotEl = document.getElementById("phaseDot");
-        const phaseTextEl = document.getElementById("phaseText");
-        const stepIndexEl = document.getElementById("stepIndex");
-        const sessionSelectEl = document.getElementById("sessionSelect");
-        const sessionInfoEl = document.getElementById("sessionInfo");
-
-        function formatTime(sec) {
-            const m = Math.floor(sec / 60);
-            const s = sec % 60;
-            return m + ":" + String(s).padStart(2, "0");
-        }
-
-        function vibrate() {
-            if (navigator.vibrate) {
-                navigator.vibrate(180);
-            }
-        }
-
-        function loadPlan(key) {
-            currentPlanKey = key;
-            if (key === "fullA") {
-                currentPlan = planFullA();
-                sessionInfoEl.textContent = "Full buổi tập – Option A";
-            } else if (key === "warmup") {
-                currentPlan = planWarmup();
-                sessionInfoEl.textContent = "Chỉ khởi động";
-            } else if (key === "cardioA") {
-                currentPlan = planCardioA();
-                sessionInfoEl.textContent = "Cardio – Option A (chạy & nhảy)";
-            } else if (key === "cardioB") {
-                currentPlan = planCardioB();
-                sessionInfoEl.textContent = "Cardio – Nhảy dây";
-            } else if (key === "core") {
-                currentPlan = planCore();
-                sessionInfoEl.textContent = "Bụng & core";
-            }
-            totalSeconds = currentPlan.reduce((sum, step) => sum + step.seconds, 0);
-            currentIndex = 0;
-            remaining = currentPlan[0].seconds;
-            elapsedTotal = 0;
-            stopTimer();
-            isRunning = false;
-            startPauseBtn.textContent = "Start";
-            updateUI();
-        }
-
-        function updateUI() {
-            const step = currentPlan[currentIndex];
-            const type = step.type || "work";
-
-            timeMainEl.textContent = formatTime(remaining);
-            timeMainEl.classList.toggle("work", type === "work");
-            timeMainEl.classList.toggle("rest", type === "rest");
-            currentStepTextEl.textContent = step.label;
-
-            phaseDotEl.classList.toggle("work", type === "work");
-            phaseDotEl.classList.toggle("rest", type === "rest");
-            phaseTextEl.textContent = type === "work" ? "Đang tập" : "Đang nghỉ";
-
-            if (!isRunning) {
-                timeLabelEl.textContent = "Bấm Start để bắt đầu";
-            } else {
-                timeLabelEl.textContent = "Đang chạy – cố lên!";
-            }
-
-            const progress = totalSeconds === 0 ? 0 : (elapsedTotal / totalSeconds) * 100;
-            progressInnerEl.style.width = progress.toFixed(2) + "%";
-
-            elapsedTextEl.textContent = formatTime(elapsedTotal);
-            const remainingSession = Math.max(totalSeconds - elapsedTotal, 0);
-            remainingTextEl.textContent = "-" + formatTime(remainingSession);
-
-            stepIndexEl.textContent = "Bước " + (currentIndex + 1) + " / " + currentPlan.length;
-        }
-
-        function tick() {
-            if (!isRunning) return;
-            if (remaining > 0) {
-                remaining -= 1;
-                elapsedTotal += 1;
-                updateUI();
-            } else {
-                // Hết bước hiện tại -> chuyển bước tiếp theo
-                vibrate();
-                if (currentIndex < currentPlan.length - 1) {
-                    currentIndex += 1;
-                    remaining = currentPlan[currentIndex].seconds;
-                    updateUI();
-                } else {
-                    // Hết buổi tập
-                    stopTimer();
-                    isRunning = false;
-                    startPauseBtn.textContent = "Start";
-                    timeLabelEl.textContent = "Xong buổi tập! Nice ✅";
-                    vibrate();
-                }
-            }
-        }
-
-        function startTimer() {
-            if (timerId) return;
-            timerId = setInterval(tick, 1000);
-        }
-
-        function stopTimer() {
-            if (timerId) {
-                clearInterval(timerId);
-                timerId = null;
-            }
-        }
-
-        // ==== BUTTON EVENTS ====
-
-        startPauseBtn.addEventListener("click", () => {
-            if (!isRunning) {
-                isRunning = true;
-                startPauseBtn.textContent = "Pause";
-                timeLabelEl.textContent = "Đang chạy – cố lên!";
-                startTimer();
-            } else {
-                isRunning = false;
-                startPauseBtn.textContent = "Resume";
-                timeLabelEl.textContent = "Đang tạm dừng";
-                stopTimer();
-            }
-        });
-
-        resetBtn.addEventListener("click", () => {
-            stopTimer();
-            isRunning = false;
-            startPauseBtn.textContent = "Start";
-            currentIndex = 0;
-            remaining = currentPlan[0].seconds;
-            elapsedTotal = 0;
-            timeLabelEl.textContent = "Reset về bước đầu";
-            updateUI();
-        });
-
-        nextBtn.addEventListener("click", () => {
-            if (currentIndex < currentPlan.length - 1) {
-                currentIndex += 1;
-                remaining = currentPlan[currentIndex].seconds;
-                updateUI();
-            }
-        });
-
-        prevBtn.addEventListener("click", () => {
-            if (currentIndex > 0) {
-                currentIndex -= 1;
-                remaining = currentPlan[currentIndex].seconds;
-                updateUI();
-            }
-        });
-
-        sessionSelectEl.addEventListener("change", (e) => {
-            loadPlan(e.target.value);
-        });
-
-        // ==== TOGGLE OPTION CARDIO (CHỈ HIỂN THỊ VĂN BẢN, KO LIÊN QUAN TIMER) ====
-        const toggleBtns = document.querySelectorAll(".btn-toggle[data-target]");
-        const optionBlocks = document.querySelectorAll(".option-block");
-
-        toggleBtns.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const targetId = btn.getAttribute("data-target");
-
-                toggleBtns.forEach((b) => b.classList.remove("active"));
-                btn.classList.add("active");
-
-                optionBlocks.forEach((block) => {
-                    block.classList.remove("active");
-                    if (block.id === targetId) {
-                        block.classList.add("active");
-                    }
-                });
-            });
-        });
-
-        // Khởi tạo giao diện ban đầu
-        loadPlan("fullA");
-    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>
